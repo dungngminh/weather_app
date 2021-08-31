@@ -1,6 +1,6 @@
 # WeatherApp
 
-A simple Weather app using openweatherapi, mvvm architecture and provider
+A simple Weather app using openweatherapi and provider
 
 ## Getting Started
 
