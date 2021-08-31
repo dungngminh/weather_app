@@ -1,4 +1,4 @@
-# WeatherApp (lười quá, trời nóng vl nữa, chưa code, thông cảm)
+# WeatherApp
 
 A simple Weather app using openweatherapi and provider
 
