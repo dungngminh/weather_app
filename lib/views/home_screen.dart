@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/view_model/weather_viewmodel.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String dayOfWeek = DateFormat('EEEE').format(DateTime.now());
   @override
   void initState() {
     super.initState();
@@ -20,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final weatherProvider = Provider.of<WeatherViewModel>(context);
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -33,20 +36,20 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
+          splashRadius: 24,
           onPressed: () {},
           icon: Icon(
             Icons.menu,
             color: Colors.black,
-            size: 20,
           ),
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            splashRadius: 24,
+            onPressed: () => Navigator,
             icon: Icon(
               Icons.search,
               color: Colors.black,
-              size: 20,
             ),
           ),
         ],
@@ -55,10 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Container(
             margin: EdgeInsets.symmetric(vertical: 16, horizontal: 15),
+            width: double.infinity,
             child: Column(
               children: [
                 Text(
-                  weatherProvider.main.toUpperCase(),
+                  weatherProvider.main?.toUpperCase() ?? 'Loading...',
                   style: GoogleFonts.montserrat(
                     color: Colors.black,
                     fontSize: 40,
@@ -66,13 +70,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(
-                    vertical: 25,
+                    vertical: 10,
                   ),
                   height: 200,
                   width: 200,
-                  child: Image.asset(
-                    "assets/icon_weather/${weatherProvider.icon}.png",
-                  ),
+                  child: weatherProvider.loadingStatus == LoadingStatus.idle
+                      ? CircularProgressIndicator()
+                      : Image.asset(
+                          "assets/icon_weather/${weatherProvider.icon}.png",
+                        ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
@@ -80,64 +86,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: IntrinsicHeight(
                     child: Row(
                       children: [
-                        Column(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${weatherProvider.temp.round()}",
-                                  style: TextStyle(
-                                    fontSize: 70,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                  textAlign: TextAlign.start,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${weatherProvider.temp?.round() ?? 0}",
+                                style: TextStyle(
+                                  fontSize: 70,
+                                  fontWeight: FontWeight.w400,
                                 ),
-                                SizedBox(
-                                  width: 5,
+                                textAlign: TextAlign.start,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "0",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                                Text(
-                                  "0",
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.arrow_downward,
-                                ),
-                                Text(
-                                  "${weatherProvider.tempMin.round()}°",
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  Icons.arrow_upward,
-                                ),
-                                Text(
-                                  "${weatherProvider.tempMax.round()}°",
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
-                        SizedBox(
-                          width: 15,
-                        ),
+                        // SizedBox(
+                        //   width: 15,
+                        // ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: Column(
@@ -147,6 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 "Details".toUpperCase(),
                                 style: GoogleFonts.montserrat(
                                   fontSize: 20,
+                                  fontWeight: FontWeight.w500,
                                   letterSpacing: 3,
                                 ),
                               ),
@@ -173,13 +151,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       _detailData(
-                                          '${weatherProvider.feelsLike.round()}°'),
+                                          '${weatherProvider.feelsLike?.round() ?? 0}°'),
                                       _detailData(
-                                          '${weatherProvider.humidity.round()}%'),
+                                          '${weatherProvider.humidity?.round() ?? 0}%'),
                                       _detailData(
-                                          '${weatherProvider.wind} Km/h'),
+                                          '${weatherProvider.wind ?? 0} Km/h'),
                                       _detailData(
-                                          '${weatherProvider.visibility / 1000} km'),
+                                          '${weatherProvider.visibility != null ? weatherProvider.visibility! / 1000 : 00} km'),
                                     ],
                                   ),
                                 ],
@@ -196,6 +174,40 @@ class _HomeScreenState extends State<HomeScreen> {
                   endIndent: 20,
                   thickness: 2,
                   color: Colors.grey,
+                ),
+                Container(
+                  height: size.height * 0.1,
+                  width: double.infinity,
+                  child: Center(
+                    child: Text(
+                      dayOfWeek,
+                      style: GoogleFonts.montserrat(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 40,
+                      ),
+                    ),
+                  ),
+                ),
+                Divider(
+                  indent: 20,
+                  endIndent: 20,
+                  thickness: 2,
+                  color: Colors.grey,
+                ),
+                Container(
+                  height: size.height * 0.1,
+                  width: double.infinity,
+                  child: Center(
+                    child: Text(
+                      partOfDay(),
+                      style: GoogleFonts.montserrat(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 40,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -229,5 +241,16 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  String partOfDay() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Morning';
+    }
+    if (hour < 17) {
+      return 'Afternoon';
+    }
+    return 'Evening';
   }
 }

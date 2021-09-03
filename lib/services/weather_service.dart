@@ -6,7 +6,7 @@ class WeatherService {
   //default : us
   Future<WeatherResponce> fetchWeatherByGeo(double lat, double lon) async {
     var url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=f1c9816b3cf28cee5dc50225fb091b3d');
+        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&units=metric&appid=f1c9816b3cf28cee5dc50225fb091b3d');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       var result = convert.jsonDecode(response.body);
