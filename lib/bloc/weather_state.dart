@@ -29,4 +29,22 @@ class WeatherState {
       weatherStatus: weatherStatus ?? this.weatherStatus,
     );
   }
+
+  String? get main => weather?.weather?.first?.main;
+
+  String? get icon => weather?.weather?.first?.icon?.replaceAll('n', 'd');
+
+  double? get temp => weather?.main?.temp;
+
+  double? get feelsLike => weather?.main?.feelsLike;
+
+  double? get tempMax => weather?.main?.tempMax;
+
+  double? get tempMin => weather?.main?.tempMin;
+
+  int? get humidity => weather?.main?.humidity;
+
+  double? get wind => weather?.wind?.speed;
+
+  int? get visibility => weather?.visibility;
 }

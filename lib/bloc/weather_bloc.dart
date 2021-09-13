@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:weather_app/bloc/weather_status.dart';
@@ -13,11 +13,10 @@ part 'weather_event.dart';
 part 'weather_state.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
-  WeatherBloc(WeatherState initialState, this.weatherRepo, this.geoRepo)
-      : super(initialState);
-
   final WeatherRepo weatherRepo;
   final GeoRepo geoRepo;
+
+  WeatherBloc(this.weatherRepo, this.geoRepo) : super(WeatherState());
 
   @override
   Stream<WeatherState> mapEventToState(

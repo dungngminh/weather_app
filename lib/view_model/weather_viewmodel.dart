@@ -16,10 +16,11 @@ class WeatherViewModel extends ChangeNotifier {
       } else
         loadingStatus = LoadingStatus.idle;
       notifyListeners();
-    } catch (Expection) {
+    } catch (_) {
       print("Weather Error");
     }
   }
+
   String? get main => _responce?.weather?.first?.main;
 
   String? get icon => _responce?.weather?.first?.icon?.replaceAll('n', 'd');
@@ -37,5 +38,4 @@ class WeatherViewModel extends ChangeNotifier {
   double? get wind => _responce?.wind?.speed;
 
   int? get visibility => _responce?.visibility;
-  
 }
