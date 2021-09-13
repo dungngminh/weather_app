@@ -43,14 +43,10 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     } else if (event is RefreshWeather) {
       yield state.copyWith(weatherStatus: WeatherIsLoading());
       try {
-        WeatherState oldState = state;
         WeatherResponce weather =
-            await weatherRepo.fetchWeatherData(oldState.lat, oldState.lon);
+            await weatherRepo.fetchWeatherData(state.lat, state.lon);
         yield state.copyWith(
           weather: weather,
-          cityName: oldState.cityName,
-          lat: oldState.lat,
-          lon: oldState.lon,
           weatherStatus: WeatherLoaded(),
         );
       } catch (_) {
