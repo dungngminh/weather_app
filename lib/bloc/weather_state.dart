@@ -22,7 +22,7 @@ class WeatherState {
       double? lon,
       WeatherStatus? weatherStatus}) {
     return WeatherState(
-      weather: weather,
+      weather: weather ?? this.weather,
       cityName: cityName ?? this.cityName,
       lat: lat ?? this.lat,
       lon: lon ?? this.lon,
