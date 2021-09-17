@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             IconButton(
               splashRadius: 24,
-              onPressed: () => Navigator.pushNamed((context), '/'),
+              onPressed: () => Navigator.restorablePushNamed((context), '/', arguments: true),
               icon: Icon(
                 Icons.search,
                 color: Colors.black,

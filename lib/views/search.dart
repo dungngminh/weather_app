@@ -9,6 +9,8 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool? isReSearch =
+        ModalRoute.of(context)?.settings.arguments as bool? ?? false;
     return Scaffold(
       body: SafeArea(
         child: BlocProvider(
@@ -31,8 +33,14 @@ class SearchScreen extends StatelessWidget {
                     else if (state.cityStatus is CitySearched)
                       return ListTile(
                         title: Text(state.cityName),
-                        subtitle: Text(state.lat.toString() + " " + state.lon.toString()),
-                        onTap: () => Navigator.pushNamed((context), 'weather', arguments: state),
+                        subtitle: Text(
+                            state.lat.toString() + " " + state.lon.toString()),
+                        onTap: () => isReSearch //TODO fix route
+                            ? Navigator.pushNamedAndRemoveUntil((context),
+                                'weather', (Route<dynamic> route) => false,
+                                arguments: state)
+                            : Navigator.pushNamed((context), 'weather',
+                                arguments: state),
                       );
                     else if (state.cityStatus is CitySearchedFail) {
                       return Text("Khong tim thay city");
