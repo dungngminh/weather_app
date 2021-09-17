@@ -1,6 +1,6 @@
 # WeatherApp
 
-A simple Weather app using openweatherapi and provider
+A simple Weather app using openweatherapi and BLoC Pattern (old:provider)
 
 ## Getting Started
 
