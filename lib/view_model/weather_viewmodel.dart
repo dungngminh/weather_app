@@ -16,34 +16,26 @@ class WeatherViewModel extends ChangeNotifier {
       } else
         loadingStatus = LoadingStatus.idle;
       notifyListeners();
-    } catch (Expection) {
+    } catch (_) {
       print("Weather Error");
     }
   }
 
-  // String get main => _responce?.weather?.first?.main ?? "";
-  // String get icon =>
-  //     _responce?.weather?.first?.icon?.replaceAll('n', 'd') ?? "";
-  // double get temp =>
-  //     _responce?.main?.temp == null ? 0 : _responce!.main!.temp! - 273.15;
-  // double get feelsLike => _responce?.main?.feelsLike == null
-  //     ? 0
-  //     : _responce!.main!.feelsLike! - 273.15;
-  // double get tempMax =>
-  //     _responce?.main?.tempMax == null ? 0 : _responce!.main!.tempMax! - 273.15;
-  // double get tempMin =>
-  //     _responce?.main?.tempMin == null ? 0 : _responce!.main!.tempMin! - 273.15;
-  // int get humidity => _responce?.main?.humidity ?? 0;
-  // double get wind => _responce?.wind?.speed ?? 0;
-  // int get visibility => _responce?.visibility ?? 0;
-
   String? get main => _responce?.weather?.first?.main;
+
   String? get icon => _responce?.weather?.first?.icon?.replaceAll('n', 'd');
+
   double? get temp => _responce?.main?.temp;
+
   double? get feelsLike => _responce?.main?.feelsLike;
+
   double? get tempMax => _responce?.main?.tempMax;
+
   double? get tempMin => _responce?.main?.tempMin;
+
   int? get humidity => _responce?.main?.humidity;
+
   double? get wind => _responce?.wind?.speed;
+
   int? get visibility => _responce?.visibility;
 }
