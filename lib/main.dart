@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/bloc/city/city_bloc.dart';
-import 'package:weather_app/bloc/weather/weather_bloc.dart';
 import 'package:weather_app/repo/geo_repo.dart';
 import 'package:weather_app/repo/weather_repo.dart';
 import 'package:weather_app/views/home_screen.dart';
