@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-import 'package:weather_app/bloc/weather_status.dart';
-import 'package:weather_app/model/city.dart';
+import 'package:weather_app/bloc/weather/weather_status.dart';
 import 'package:weather_app/model/weather.dart';
 import 'package:weather_app/repo/geo_repo.dart';
 import 'package:weather_app/repo/weather_repo.dart';
@@ -14,9 +12,8 @@ part 'weather_state.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final WeatherRepo weatherRepo;
-  final GeoRepo geoRepo;
 
-  WeatherBloc(this.weatherRepo, this.geoRepo) : super(WeatherState());
+  WeatherBloc(this.weatherRepo) : super(WeatherState());
 
   @override
   Stream<WeatherState> mapEventToState(
@@ -25,14 +22,13 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     if (event is FetchWeatherData) {
       yield state.copyWith(weatherStatus: WeatherIsLoading());
       try {
-        City city = await geoRepo.fetchDataByCityName(event._city);
         WeatherResponce weather =
-            await weatherRepo.fetchWeatherData(city.lat!, city.lon!);
+            await weatherRepo.fetchWeatherData(event.lat, event.lon);
         yield state.copyWith(
           weather: weather,
-          cityName: city.localNames!.ascii,
-          lat: city.lat!,
-          lon: city.lon,
+          cityName: event.city,
+          lat: event.lat,
+          lon: event.lon,
           weatherStatus: WeatherLoaded(),
         );
       } catch (_) {
@@ -47,6 +43,9 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
             await weatherRepo.fetchWeatherData(state.lat, state.lon);
         yield state.copyWith(
           weather: weather,
+          cityName: state.cityName,
+          lat: state.lat,
+          lon: state.lon,
           weatherStatus: WeatherLoaded(),
         );
       } catch (_) {
@@ -55,3 +54,4 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     }
   }
 }
+

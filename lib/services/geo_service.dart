@@ -11,8 +11,10 @@ class GeoService {
 
     if (response.statusCode == 200) {
       var result = convert.jsonDecode(response.body);
+      Iterable list = result;
       print(result);
-      return City.fromJson(result);
+      // print(City.fromJson(result));
+      return list.map((e) => City.fromJson(e)).toList().first;
     } else
       throw Exception("failed to get city");
   }

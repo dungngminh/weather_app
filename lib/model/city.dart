@@ -4,31 +4,211 @@
 class CityLocalNames {
 /*
 {
-  "ascii": "Gia Lai",
-  "en": "Gia Lai",
-  "feature_name": "Tỉnh Gia Lai"
+  "af": "Londen",
+  "ar": "لندن",
+  "ascii": "London",
+  "az": "London",
+  "bg": "Лондон",
+  "ca": "Londres",
+  "da": "London",
+  "de": "London",
+  "el": "Λονδίνο",
+  "en": "London",
+  "eu": "Londres",
+  "fa": "لندن",
+  "feature_name": "London",
+  "fi": "Lontoo",
+  "fr": "Londres",
+  "gl": "Londres",
+  "he": "לונדון",
+  "hi": "लंदन",
+  "hr": "London",
+  "hu": "London",
+  "id": "London",
+  "it": "Londra",
+  "ja": "ロンドン",
+  "la": "Londinium",
+  "lt": "Londonas",
+  "mk": "Лондон",
+  "nl": "Londen",
+  "no": "London",
+  "pl": "Londyn",
+  "pt": "Londres",
+  "ro": "Londra",
+  "ru": "Лондон",
+  "sk": "Londýn",
+  "sl": "London",
+  "sr": "Лондон",
+  "th": "ลอนดอน",
+  "tr": "Londra",
+  "vi": "Luân Đôn",
+  "zu": "ILondon"
 } 
 */
 
+  String? af;
+  String? ar;
   String? ascii;
+  String? az;
+  String? bg;
+  String? ca;
+  String? da;
+  String? de;
+  String? el;
   String? en;
+  String? eu;
+  String? fa;
   String? featureName;
+  String? fi;
+  String? fr;
+  String? gl;
+  String? he;
+  String? hi;
+  String? hr;
+  String? hu;
+  String? id;
+  String? it;
+  String? ja;
+  String? la;
+  String? lt;
+  String? mk;
+  String? nl;
+  String? no;
+  String? pl;
+  String? pt;
+  String? ro;
+  String? ru;
+  String? sk;
+  String? sl;
+  String? sr;
+  String? th;
+  String? tr;
+  String? vi;
+  String? zu;
 
   CityLocalNames({
+    this.af,
+    this.ar,
     this.ascii,
+    this.az,
+    this.bg,
+    this.ca,
+    this.da,
+    this.de,
+    this.el,
     this.en,
+    this.eu,
+    this.fa,
     this.featureName,
+    this.fi,
+    this.fr,
+    this.gl,
+    this.he,
+    this.hi,
+    this.hr,
+    this.hu,
+    this.id,
+    this.it,
+    this.ja,
+    this.la,
+    this.lt,
+    this.mk,
+    this.nl,
+    this.no,
+    this.pl,
+    this.pt,
+    this.ro,
+    this.ru,
+    this.sk,
+    this.sl,
+    this.sr,
+    this.th,
+    this.tr,
+    this.vi,
+    this.zu,
   });
   CityLocalNames.fromJson(Map<String, dynamic> json) {
+    af = json["af"]?.toString();
+    ar = json["ar"]?.toString();
     ascii = json["ascii"]?.toString();
+    az = json["az"]?.toString();
+    bg = json["bg"]?.toString();
+    ca = json["ca"]?.toString();
+    da = json["da"]?.toString();
+    de = json["de"]?.toString();
+    el = json["el"]?.toString();
     en = json["en"]?.toString();
+    eu = json["eu"]?.toString();
+    fa = json["fa"]?.toString();
     featureName = json["feature_name"]?.toString();
+    fi = json["fi"]?.toString();
+    fr = json["fr"]?.toString();
+    gl = json["gl"]?.toString();
+    he = json["he"]?.toString();
+    hi = json["hi"]?.toString();
+    hr = json["hr"]?.toString();
+    hu = json["hu"]?.toString();
+    id = json["id"]?.toString();
+    it = json["it"]?.toString();
+    ja = json["ja"]?.toString();
+    la = json["la"]?.toString();
+    lt = json["lt"]?.toString();
+    mk = json["mk"]?.toString();
+    nl = json["nl"]?.toString();
+    no = json["no"]?.toString();
+    pl = json["pl"]?.toString();
+    pt = json["pt"]?.toString();
+    ro = json["ro"]?.toString();
+    ru = json["ru"]?.toString();
+    sk = json["sk"]?.toString();
+    sl = json["sl"]?.toString();
+    sr = json["sr"]?.toString();
+    th = json["th"]?.toString();
+    tr = json["tr"]?.toString();
+    vi = json["vi"]?.toString();
+    zu = json["zu"]?.toString();
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
+    data["af"] = af;
+    data["ar"] = ar;
     data["ascii"] = ascii;
+    data["az"] = az;
+    data["bg"] = bg;
+    data["ca"] = ca;
+    data["da"] = da;
+    data["de"] = de;
+    data["el"] = el;
     data["en"] = en;
+    data["eu"] = eu;
+    data["fa"] = fa;
     data["feature_name"] = featureName;
+    data["fi"] = fi;
+    data["fr"] = fr;
+    data["gl"] = gl;
+    data["he"] = he;
+    data["hi"] = hi;
+    data["hr"] = hr;
+    data["hu"] = hu;
+    data["id"] = id;
+    data["it"] = it;
+    data["ja"] = ja;
+    data["la"] = la;
+    data["lt"] = lt;
+    data["mk"] = mk;
+    data["nl"] = nl;
+    data["no"] = no;
+    data["pl"] = pl;
+    data["pt"] = pt;
+    data["ro"] = ro;
+    data["ru"] = ru;
+    data["sk"] = sk;
+    data["sl"] = sl;
+    data["sr"] = sr;
+    data["th"] = th;
+    data["tr"] = tr;
+    data["vi"] = vi;
+    data["zu"] = zu;
     return data;
   }
 }
@@ -36,15 +216,51 @@ class CityLocalNames {
 class City {
 /*
 {
-  "name": "Tỉnh Gia Lai",
+  "name": "London",
   "local_names": {
-    "ascii": "Gia Lai",
-    "en": "Gia Lai",
-    "feature_name": "Tỉnh Gia Lai"
+    "af": "Londen",
+    "ar": "لندن",
+    "ascii": "London",
+    "az": "London",
+    "bg": "Лондон",
+    "ca": "Londres",
+    "da": "London",
+    "de": "London",
+    "el": "Λονδίνο",
+    "en": "London",
+    "eu": "Londres",
+    "fa": "لندن",
+    "feature_name": "London",
+    "fi": "Lontoo",
+    "fr": "Londres",
+    "gl": "Londres",
+    "he": "לונדון",
+    "hi": "लंदन",
+    "hr": "London",
+    "hu": "London",
+    "id": "London",
+    "it": "Londra",
+    "ja": "ロンドン",
+    "la": "Londinium",
+    "lt": "Londonas",
+    "mk": "Лондон",
+    "nl": "Londen",
+    "no": "London",
+    "pl": "Londyn",
+    "pt": "Londres",
+    "ro": "Londra",
+    "ru": "Лондон",
+    "sk": "Londýn",
+    "sl": "London",
+    "sr": "Лондон",
+    "th": "ลอนดอน",
+    "tr": "Londra",
+    "vi": "Luân Đôn",
+    "zu": "ILondon"
   },
-  "lat": 13.75,
-  "lon": 108.25,
-  "country": "VN"
+  "lat": 51.5085,
+  "lon": -0.1257,
+  "country": "GB"
 } 
 */
 
