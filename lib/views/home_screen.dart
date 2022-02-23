@@ -53,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             IconButton(
               splashRadius: 24,
-              onPressed: () => Navigator.restorablePushNamed((context), '/', arguments: true),
+              onPressed: () => Navigator.restorablePushNamed((context), '/',
+                  arguments: true),
               icon: Icon(
                 Icons.search,
                 color: Colors.black,
@@ -64,7 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
         body: BlocBuilder<WeatherBloc, WeatherState>(
           builder: (context, state) {
             return RefreshIndicator(
-              onRefresh: () => context.read<WeatherBloc>().refreshWeather(),
+              onRefresh: () async =>
+                  context.read<WeatherBloc>().add(RefreshWeather()),
               child: SingleChildScrollView(
                 child: Column(
                   children: [

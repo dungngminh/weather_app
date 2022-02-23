@@ -9,27 +9,24 @@ part 'city_state.dart';
 
 class CityBloc extends Bloc<CityEvent, CityState> {
   final GeoRepo geoRepo;
-  CityBloc(this.geoRepo) : super(CityState());
-
-  @override
-  Stream<CityState> mapEventToState(
-    CityEvent event,
-  ) async* {
-    if (event is CityNameChanged) {
-      yield state.copyWith(cityStatus: CityIsSearching());
+  CityBloc(this.geoRepo) : super(CityState()){
+    on<CityNameChanged>(((event, emit) async {
+      emit(state.copyWith(cityStatus: CityIsSearching()));
       try {
         City city = await geoRepo.fetchDataByCityName(event.cityName);
         print(city);
-        yield state.copyWith(
+        emit(state.copyWith(
           cityName: city.localNames!.ascii,
           lat: city.lat,
           lon: city.lon,
           cityStatus: CitySearched(),
-        );
+        ));
       } catch (_) {
         print(false);
-        yield state.copyWith(cityStatus: CitySearchedFail());
+        emit (state.copyWith(cityStatus: CitySearchedFail()));
       }
-    }
+    }));
   }
+
+
 }

@@ -32,7 +32,10 @@ class SearchScreen extends StatelessWidget {
                       return CircularProgressIndicator();
                     else if (state.cityStatus is CitySearched)
                       return ListTile(
-                        title: Text(state.cityName),
+                        title: Text(
+                          state.cityName,
+                          style: TextStyle(color: Colors.black),
+                        ),
                         subtitle: Text(
                             state.lat.toString() + " " + state.lon.toString()),
                         onTap: () => isReSearch //TODO fix route
